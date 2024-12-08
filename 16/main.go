@@ -30,7 +30,7 @@ func quickSort(array []int) []int {
 }
 
 func main() {
-	arr := []int{64, 34, 25, 12, 22, 11, 90, 34}
+	arr := []int{64, 34, 25, 12, 22, 11, 90}
 
 	fmt.Println("sorted array:", quickSort(arr))
 }
