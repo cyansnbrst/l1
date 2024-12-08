@@ -1,38 +1,32 @@
 package main
 
-import (
-	"fmt"
-)
+import "fmt"
 
-var justString string
-
-func createHugeString(size int) []byte {
-	slice := make([]byte, size)
-
-	for i := range slice {
-		slice[i] = 'a'
+func determineType(x interface{}) {
+	switch v := x.(type) {
+	case int:
+		fmt.Printf("%d: int\n", v)
+	case string:
+		fmt.Printf("%s: string\n", v)
+	case bool:
+		fmt.Printf("%v: bool\n", v)
+	case chan int:
+		fmt.Printf("%v: channel\n", v)
+	default:
+		fmt.Printf("%v: other\n", v)
 	}
-
-	return slice
-}
-
-// func someFunc() {
-// 	v := createHugeString(1 << 10)
-// //	justString contains a link to all 1 << 10 array
-// 	justString = v[:100]
-// }
-
-func someFunc() string {
-	v := createHugeString(1 << 10)
-
-	justString := make([]byte, 100)
-	copy(justString, v[:100])
-
-	return string(justString)
 }
 
 func main() {
-	justString := someFunc()
-	fmt.Println(justString)
-	fmt.Println(len(justString))
+	variables := []interface{}{
+		42,
+		"Hello, World!",
+		true,
+		make(chan int),
+		3.14,
+	}
+
+	for _, v := range variables {
+		determineType(v)
+	}
 }
